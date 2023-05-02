@@ -9,7 +9,7 @@ import win32api
 
 build = 'C-NotePad 1.0.2023'
 
-#updater
+#updater // UNDONE
 def updater():
     global update_win, current_version, new_version
     
