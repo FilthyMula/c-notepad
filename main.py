@@ -4,12 +4,13 @@ from tkinter import scrolledtext
 from tkinter import filedialog
 from tkinter import font
 from tkinter import *
+import requests
 import win32api
 
 
 build = 'C-NotePad 1.0.2023'
 
-#updater // UNDONE
+#updater
 def updater():
     global update_win, current_version, new_version
     
@@ -62,6 +63,13 @@ def update():
     x = (screen_width/2) - (w/2)
     y = (screen_height/2) - (h/2)
     updating_win.geometry('%dx%d+%d+%d' % (w, h, x, y))
+    
+    url = "https://github.com/FilthyMula/c-notepad/blob/main/main.py"
+    resp = requests.get(url)
+    os.remove('main.py')
+    with open('main.py', 'a+') as f:
+        f.write(resp)
+        f.close()
         
     #Label(updating_win, text='Updating..', font=main_font).place(x=5, y=10)
     #for i in range(5):
@@ -108,6 +116,42 @@ def underline():
     except TclError:
         pass
 
+def size_8():
+    pad.config(font=font.Font(size = 8))
+    
+def size_10():
+    pad.config(font=font.Font(size = 10))
+    
+def size_12():
+    pad.config(font=font.Font(size = 12))
+    
+def size_14():
+    pad.config(font=font.Font(size = 14))
+    
+def size_16():
+    pad.config(font=font.Font(size = 16))
+    
+def size_18():
+    pad.config(font=font.Font(size = 18))
+    
+def size_20():
+    pad.config(font=font.Font(size = 20))
+    
+def size_22():
+    pad.config(font=font.Font(size = 22))
+    
+def size_24():
+    pad.config(font=font.Font(size = 24))
+    
+def size_26():
+    pad.config(font=font.Font(size = 26))
+    
+def size_28():
+    pad.config(font=font.Font(size = 28))
+    
+def size_30():
+    pad.config(font=font.Font(size = 30))
+
 def black_pad():
     pad.config(bg='black')
     events.config(text='NotePad - Black back-ground selected')
@@ -141,14 +185,14 @@ def open_file():
     pad.delete('1.0', END)    
     text_file = filedialog.askopenfilename(title='Open File', filetypes=(('Text Files', '*.txt'), ('HTML Files', '*.html'), ('Python Files', '*.py'), ('All Files', '*.*')))
     if text_file:
-            name = text_file
-            events.config(text=f'Opened: {name}')
-            name = name.replace('C:/notepad/', "")
-            root.title(f"{name}")
-            text_file = open(text_file, 'r')
-            stuff = text_file.read()
-            pad.insert(END, stuff)
-            text_file.close()
+        name = text_file
+        events.config(text=f'Opened: {name}')
+        name = name.replace('C:/notepad/', "")
+        root.title(f"{name}")
+        text_file = open(text_file, 'r')
+        stuff = text_file.read()
+        pad.insert(END, stuff)
+        text_file.close()
 
 def save_as_file():
     text_file = filedialog.asksaveasfilename(defaultextension=".*", title='Save File', filetypes=(('Text Files', '*.txt'), ('HTML Files', '*.html'), ('Python Files', '*.py'), ('All Files', '*.*')))
@@ -500,18 +544,18 @@ def main():
     
     #size edit sub
     size_sub_menu = Menu(edit_menu, tearoff=0)
-    size_sub_menu.add_command(label='8')
-    size_sub_menu.add_command(label='10')
-    size_sub_menu.add_command(label='12')
-    size_sub_menu.add_command(label='14')
-    size_sub_menu.add_command(label='16')
-    size_sub_menu.add_command(label='18')
-    size_sub_menu.add_command(label='20')
-    size_sub_menu.add_command(label='22')
-    size_sub_menu.add_command(label='24')
-    size_sub_menu.add_command(label='26')
-    size_sub_menu.add_command(label='28')
-    size_sub_menu.add_command(label='30')
+    size_sub_menu.add_command(label='8', command=size_8)
+    size_sub_menu.add_command(label='10', command=size_10)
+    size_sub_menu.add_command(label='12', command=size_12)
+    size_sub_menu.add_command(label='14', command=size_14)
+    size_sub_menu.add_command(label='16', command=size_16)
+    size_sub_menu.add_command(label='18', command=size_18)
+    size_sub_menu.add_command(label='20', command=size_20)
+    size_sub_menu.add_command(label='22', command=size_22)
+    size_sub_menu.add_command(label='24', command=size_24)
+    size_sub_menu.add_command(label='26', command=size_26)
+    size_sub_menu.add_command(label='28', command=size_28)
+    size_sub_menu.add_command(label='30', command=size_30)
 
     edit_menu.add_cascade(
     label="Size",
@@ -614,4 +658,4 @@ def main():
 
 #APP
 if __name__ == '__main__':
-    main()
+    main()  
